@@ -1,31 +1,25 @@
-def Main():
+import re
+def calcular(expressao):
+    try:
+        expressao = expressao.replace(' ', '')
+        if not re.match(r'^[0-9+\-*/.]+$', expressao):
+            return "Erro: A Expressão contém caracteres inválidos."
+        resultado = eval(expressao)
+
+        if isinstance(resultado, float):
+            return f"{resultado}".replace('.', ',')
+        return resultado
+    except Exception as e:
+        return f"Erro: {str(e)}"
+    
+def main():
     while True:
-        num1 = float(input("Digite o primeiro número: "))
-        operador = input("Escolha um Operador: (+, -, *, /): ")
-        num2 = float(input("Digite o segundo número: "))
-
-        if operador == '+':
-            resultado = num1 + num2
-
-        elif operador == '-':
-            resultado = num1 - num2
-
-        elif operador == '*':
-            resultado = num1 * num2
-
-        elif operador == '/':
-            if num2 == 0:
-                print("Divisão por zero não é permitido")
-            else:
-                resultado = num1 / num2
-                
-        else:
-            print("Operador inválido.")
-            continue
-
-        print("Resultado:", resultado)
-
-        continuar = input("Deseja cotinuar? (y/n): ")
-        if continuar.lower() != 'y':
+        expressao = input("Calcule: ")
+        if expressao.lower() == 'sair':
+            print("Fechando Calculadora...")
             break
-Main()
+        resultado = calcular(expressao)
+        print(f"Resultado: {resultado}\n")
+
+if __name__ == "__main__":
+    main()
