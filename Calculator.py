@@ -1,7 +1,7 @@
 import re
 def calcular(expressao):
     try:
-        expressao = expressao.replace(' ', '')
+        expressao = expressao.replace('^', '**')
         if not re.match(r'^[0-9+\-*/.]+$', expressao):
             return "Erro: A Expressão contém caracteres inválidos."
         resultado = eval(expressao)
